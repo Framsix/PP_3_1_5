@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -122,5 +123,31 @@ public class Users implements UserDetails {
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Users users = (Users) o;
+
+        if (id != users.id) return false;
+        if (years != users.years) return false;
+        if (!Objects.equals(name, users.name)) return false;
+        if (!Objects.equals(username, users.username)) return false;
+        if (!Objects.equals(password, users.password)) return false;
+        return Objects.equals(roles, users.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (int) years;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        return result;
     }
 }
