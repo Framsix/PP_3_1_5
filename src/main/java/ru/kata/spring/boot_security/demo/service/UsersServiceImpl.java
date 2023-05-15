@@ -40,6 +40,12 @@ public class UsersServiceImpl implements UsersService {
     public Users showUser(int id) {
         return usersRepository.getOne(id);
     }
+
+    @Transactional
+    public Users save(Users user) {
+        return usersRepository.save(user);
+    }
+
     public Users findByUsername(String username) {
         return usersRepository.findByUsername(username);
     }

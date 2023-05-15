@@ -1,6 +1,8 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +24,16 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String getAllUsers(Model model) {
-        model.addAttribute("users", usersService.read() );
+        model.addAttribute("users", usersService.read());
+        model.addAttribute("allRoles", roleService.getAllRoles());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        System.out.println(username);
+        // получаем данные пользователя по имени пользователя (username)
+        Users user = usersService.findByUsername(username);
+        model.addAttribute("user", user);
+        model.addAttribute("registrationUser", new Users());
+        model.addAttribute("editUser", new Users());
         return "users/GetUsers";
     }
 
