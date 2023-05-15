@@ -1,16 +1,14 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
-public class Users implements UserDetails {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -24,10 +22,10 @@ public class Users implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Collection<Role> roles;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(int id, String name, byte years, String username, String password, Set<Role> roles) {
+    public User(int id, String name, byte years, String username, String password, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.years = years;
@@ -128,14 +126,14 @@ public class Users implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Users users = (Users) o;
+        User user = (User) o;
 
-        if (id != users.id) return false;
-        if (years != users.years) return false;
-        if (!Objects.equals(name, users.name)) return false;
-        if (!Objects.equals(username, users.username)) return false;
-        if (!Objects.equals(password, users.password)) return false;
-        return Objects.equals(roles, users.roles);
+        if (id != user.id) return false;
+        if (years != user.years) return false;
+        if (!Objects.equals(name, user.name)) return false;
+        if (!Objects.equals(username, user.username)) return false;
+        if (!Objects.equals(password, user.password)) return false;
+        return Objects.equals(roles, user.roles);
     }
 
     @Override

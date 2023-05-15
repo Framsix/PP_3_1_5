@@ -1,12 +1,10 @@
 package ru.kata.spring.boot_security.demo.repository;
 
-import ru.kata.spring.boot_security.demo.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
+import ru.kata.spring.boot_security.demo.model.User;
 
 @Repository
-public interface UsersRepository extends JpaRepository <Users, Integer> {
-    Users findByUsername(String username);
+public interface UsersRepository extends JpaRepository <User, Integer> {
+    User findByUsername(String username);
 }

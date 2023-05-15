@@ -3,14 +3,13 @@ package ru.kata.spring.boot_security.demo.service;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.model.Users;
-import ru.kata.spring.boot_security.demo.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,7 +27,7 @@ public class UsersDetailService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = usersService.findByUsername(username);
+        User user = usersService.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User ot found");
         }
