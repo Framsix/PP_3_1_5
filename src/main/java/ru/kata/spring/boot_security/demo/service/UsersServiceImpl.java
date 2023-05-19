@@ -41,11 +41,13 @@ public class UsersServiceImpl implements UsersService {
         return usersRepository.getOne(id);
     }
 
-    public User save(User user) {
-        return usersRepository.save(user);
-    }
 
     public User findByUsername(String username) {
         return usersRepository.findByUsername(username);
+    }
+
+    @Transactional
+    public void deleteById(int id) {
+        usersRepository.deleteById(id);
     }
 }
