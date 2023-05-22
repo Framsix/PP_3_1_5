@@ -12,7 +12,6 @@ import java.util.List;
 public class UsersServiceImpl implements UsersService {
     private final UsersRepository usersRepository;
 
-    @Autowired
     public UsersServiceImpl(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
     }
@@ -22,21 +21,21 @@ public class UsersServiceImpl implements UsersService {
         usersRepository.save(user);
     }
 
-    @Transactional
+
     public void delete(User user) {
         usersRepository.delete(user);
     }
 
-    @Transactional(readOnly = true)
+
     public List<User> read() {
         return usersRepository.findAll();
     }
 
-    @Transactional
+
     public void update(User user) {
         usersRepository.save(user);
     }
-    @Transactional
+
     public User showUser(int id) {
         return usersRepository.getOne(id);
     }
@@ -46,7 +45,7 @@ public class UsersServiceImpl implements UsersService {
         return usersRepository.findByUsername(username);
     }
 
-    @Transactional
+
     public void deleteById(int id) {
         usersRepository.deleteById(id);
     }

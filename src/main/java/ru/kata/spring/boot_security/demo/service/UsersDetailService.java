@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 public class UsersDetailService implements UserDetailsService {
     private final UsersService usersService;
 
-    @Autowired
     public UsersDetailService(UsersService usersService) {
         this.usersService = usersService;
     }
